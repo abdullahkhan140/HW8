@@ -1,6 +1,6 @@
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   Abdullah I Khan Section 002
  *
  *   Note, additional comments provided throughout this source code
  *   is for educational purposes
@@ -8,6 +8,7 @@
  ********************************************************************/
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,16 +39,16 @@ public class Graph {
 
   /*
    * method setValue
-   * 
+   *
    * Sets a vertex's (node's) value.
-   */ 
-  
+   */
+
   public void setValue(int vertexIndex, int value) {
     if (vertexIndex >= 0 && vertexIndex < numVertices) {
       vertexValues.set(vertexIndex, value);
     } else {
       throw new IllegalArgumentException(
-             "Invalid vertex index: " + vertexIndex);
+              "Invalid vertex index: " + vertexIndex);
     }
   }
 
@@ -58,13 +59,13 @@ public class Graph {
 
   /*
    * method printGraph
-   * 
+   *
    * Prints the graph as an adjacency matrix
-   */ 
-  
+   */
+
   public void printGraph() {
     System.out.println(
-         "\nAdjacency Matrix Representation:\n");
+            "\nAdjacency Matrix Representation:\n");
     int[][] matrix = new int[numVertices][numVertices];
 
     for (int i = 0; i < numVertices; i++) {
@@ -95,16 +96,36 @@ public class Graph {
 
   /**
    * method findRoot
-   *
+   * <p>
    * This method returns the value of the root vertex, where root is defined in
    * this case as a node that has no incoming edges. If no root vertex is found
    * and/or more than one root vertex, then return -1.
-   * 
    */
-  
-  public int findRoot() {
 
-    // ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOUR NAME/SECTION AT TOP OF FILE
-    return -1;
-  } 
+  public int findRoot() {
+    int[] edgeCount = new int[numVertices]; // Array for incoming edges count for each node
+
+    // Count the incoming edges for each vertex
+    for (int index = 0; index < numVertices; index++) {
+      for (Integer neighbor : adjListArr[index]) {
+        edgeCount[neighbor]++;  // Increment the edge count for neighbor node
+      }
+    }
+    int rootCount = 0; // count number of root nodes
+    int rootNode = -1; // store root node if found
+    // Find the vertex with no incoming edges
+    for (int node = 0; node < numVertices; node++) {
+      if (edgeCount[node] == 0) {
+        rootCount++;
+        rootNode = node;  // potential node since there is no incoming edge
+      }
+    }
+
+    // If there is exactly one root vertex, return it. if not, return -1.
+    if (rootCount == 1) {
+      return vertexValues.get(rootNode);  // Return value of root node
+    } else {
+      return -1;
+    }
+  }
 }
