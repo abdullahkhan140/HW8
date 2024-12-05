@@ -111,6 +111,11 @@ public class Graph {
         edgeCount[neighbor]++;  // Increment the edge count for neighbor node
       }
     }
+    /**
+     * No root - return -1
+     * One root - return the root VALUE
+     * More than one root - return -1
+     */
     int rootCount = 0; // count number of root nodes
     int rootNode = -1; // store root node if found
     // Find the vertex with no incoming edges
