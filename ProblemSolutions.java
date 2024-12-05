@@ -83,7 +83,7 @@ class ProblemSolutions {
             int exam = preReq[0]; // exam needs prereq
             int prereq = preReq[1]; // exam = preq
             adj[prereq].add(exam); // add exam to dependent exams list
-            prerequisitesCount[exam]++; // increment prereq count
+            prerequisitesCount[exam]++; // increment prereq count (inDegree)
         }
         Queue<Integer> queue = new LinkedList<>();
         for (int i = 0; i < numExams; i++) { // start by adding exams that dont need prereq
